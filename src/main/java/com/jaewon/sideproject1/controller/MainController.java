@@ -1,6 +1,7 @@
 package com.jaewon.sideproject1.controller;
 
 import com.jaewon.sideproject1.service.BoardService;
+import com.jaewon.sideproject1.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class MainController {
     private final BoardService boardService;
+    private final ReplyService replyService;
 
     @GetMapping("/")
     public String getMain(Model model) {
@@ -22,6 +24,7 @@ public class MainController {
     @GetMapping("/board/{id}")
     public String getBoard(@PathVariable Long id, Model model) {
         model.addAttribute("board", boardService.getBoard(id, true));
+        model.addAttribute("replies", replyService.getReplies(id));
 
         return "detail";
     }

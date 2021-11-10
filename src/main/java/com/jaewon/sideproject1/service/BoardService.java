@@ -2,6 +2,8 @@ package com.jaewon.sideproject1.service;
 
 import com.jaewon.sideproject1.domain.Board;
 import com.jaewon.sideproject1.domain.BoardRepository;
+import com.jaewon.sideproject1.domain.Reply;
+import com.jaewon.sideproject1.domain.ReplyRepository;
 import com.jaewon.sideproject1.dto.BoardRequestDto;
 import com.jaewon.sideproject1.dto.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.List;
 @Service
 public class BoardService {
     private final BoardRepository boardRepository;
+    private final ReplyRepository replyRepository;
 
     public List<BoardResponseDto> getBoards() {
         List<BoardResponseDto> results = new ArrayList<>();
@@ -52,6 +55,12 @@ public class BoardService {
 
     @Transactional
     public void delete(Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+
+        for (Reply reply : replyRepository.findAllByBoard(board)) {
+            replyRepository.deleteById(reply.getId());
+        }
+
         boardRepository.deleteById(id);
     }
 }

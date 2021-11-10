@@ -21,10 +21,29 @@
         <a href="/"><button class="btn btn-default">뒤로</button></a>
     </div>
 
+    <ul id="replies">
+        <li th:each="reply : ${replies}">
+            <input hidden class="replyId" th:value="${reply.id}">
+            <p>작성자 : <span th:text="${reply.writer}"></span></p>
+            <p th:text="${reply.content}"></p>
+            <p><span th:text="${reply.createdDate}"></span></p>
+            <button class="updateReply">수정</button>
+            <button class="deleteReply">삭제</button>
+        </li>
+    </ul>
+
+    <form>
+        <label>작성자</label>
+        <input id="createReplyWriter"><br>
+        <textarea id="createReplyContent"></textarea>
+    </form>
+    <button id="createReply">댓글 등록</button>
+
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="/js/board.js"></script>
+    <script src="/js/reply.js"></script>
 </body>
 
 </html>

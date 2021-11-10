@@ -1,10 +1,8 @@
 package com.jaewon.sideproject1.controller;
 
-import com.jaewon.sideproject1.domain.Board;
-import com.jaewon.sideproject1.domain.BoardRepository;
+import com.jaewon.sideproject1.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,21 +10,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequiredArgsConstructor
 @Controller
 public class MainController {
-    private final BoardRepository boardRepository;
+    private final BoardService boardService;
 
     @GetMapping("/")
     public String getMain(Model model) {
-        model.addAttribute("boards", boardRepository.findAll());
+        model.addAttribute("boards", boardService.getBoards());
+
         return "main";
     }
 
-    @Transactional
     @GetMapping("/board/{id}")
     public String getBoard(@PathVariable Long id, Model model) {
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException());
-        board.addCnt();
-        model.addAttribute("board", board);
+        model.addAttribute("board", boardService.getBoard(id, true));
+
         return "detail";
     }
 
@@ -37,8 +33,8 @@ public class MainController {
 
     @GetMapping("/board/update/{id}")
     public String getUpdate(@PathVariable Long id, Model model) {
-        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
-        model.addAttribute("board", board);
+        model.addAttribute("board", boardService.getBoard(id, false));
+
         return "update";
     }
 }

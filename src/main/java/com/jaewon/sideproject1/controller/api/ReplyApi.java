@@ -2,6 +2,7 @@ package com.jaewon.sideproject1.controller.api;
 
 import com.jaewon.sideproject1.dto.ReplyRequestDto;
 import com.jaewon.sideproject1.dto.ReplyResponseDto;
+import com.jaewon.sideproject1.dto.ReplyUpdateRequestDto;
 import com.jaewon.sideproject1.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class ReplyApi {
     }
 
     @PutMapping("/api/reply/{replyId}")
-    public void updateReply(@PathVariable Long replyId, @RequestBody ReplyRequestDto requestDto) {
+    public void updateReply(@PathVariable Long replyId, @RequestBody ReplyUpdateRequestDto requestDto) {
         replyService.update(replyId, requestDto);
     }
 

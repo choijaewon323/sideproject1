@@ -6,6 +6,7 @@ import com.jaewon.sideproject1.domain.Reply;
 import com.jaewon.sideproject1.domain.ReplyRepository;
 import com.jaewon.sideproject1.dto.ReplyRequestDto;
 import com.jaewon.sideproject1.dto.ReplyResponseDto;
+import com.jaewon.sideproject1.dto.ReplyUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,10 +45,10 @@ public class ReplyService {
     }
 
     @Transactional
-    public void update(Long replyId, ReplyRequestDto requestDto) {
+    public void update(Long replyId, ReplyUpdateRequestDto requestDto) {
         Reply reply = replyRepository.findById(replyId).orElseThrow(() -> new IllegalArgumentException());
 
-        reply.update(requestDto.getContent(), requestDto.getWriter());
+        reply.update(requestDto.getContent(), reply.getWriter());
     }
 
     @Transactional

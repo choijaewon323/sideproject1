@@ -29,7 +29,6 @@ document.getElementById('createReply').addEventListener('click', function() {
             '</li>'
 
         content.value = '';
-        writer.value = '';
     })
 })
 
@@ -39,11 +38,19 @@ let flag = false;
 
 document.getElementById('replies').addEventListener('click', function(e) {
     if (e.target.classList.contains('updateReply')) {
+        let li = e.target.parentNode;
+        let replyWriter = li.getElementsByClassName('replyWriter')[0];
+        let createReplyWriter = document.getElementById('createReplyWriter');
+
+        if (replyWriter.innerText != createReplyWriter.value) {
+            alert('댓글을 수정할 권한이 없습니다.');
+            return;
+        }
+
         if (flag) {
             tempTarget.innerHTML = tempInnerHTML;
         }
 
-        let li = e.target.parentNode;
         tempInnerHTML = li.innerHTML;
         let replyId = li.getElementsByClassName('replyId')[0].value;
         let replyContent = li.getElementsByClassName('replyContent')[0];
@@ -61,6 +68,13 @@ document.getElementById('replies').addEventListener('click', function(e) {
     } else if (e.target.classList.contains('deleteReply')) {
         let li = e.target.parentNode;
         let replyId = li.getElementsByClassName('replyId')[0].value;
+        let replyWriter = li.getElementsByClassName('replyWriter')[0];
+        let createReplyWriter = document.getElementById('createReplyWriter');
+
+        if (replyWriter.innerText != createReplyWriter.value) {
+            alert('댓글을 삭제할 권한이 없습니다.');
+            return;
+        }
 
         $.ajax({
             url: '/api/reply/' + replyId,

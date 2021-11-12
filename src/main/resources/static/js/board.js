@@ -23,6 +23,18 @@ if (document.getElementById('createBoard') !== null) {
     })
 }
 
+if (document.getElementById('updateBoardButton') !== null) {
+    document.getElementById('updateBoardButton').addEventListener('click', function() {
+        if (document.getElementById('createReplyWriter').value !== document.getElementById('boardWriter').innerText) {
+            alert('수정할 권한이 없습니다.');
+        } else {
+            let boardId = document.getElementById('boardId');
+
+            window.location.href = "/board/update/" + boardId.value;
+        }
+    })
+}
+
 if (document.getElementById('updateBoard') !== null) {
     document.getElementById('updateBoard').addEventListener('click', function() {
         let title = document.getElementById('title').value;
@@ -53,14 +65,18 @@ if (document.getElementById('deleteBoard') !== null) {
     document.getElementById('deleteBoard').addEventListener('click', function() {
         let id = document.getElementById('boardId').value;
 
-        $.ajax({
-            url: '/api/board/' + id,
-            method: 'DELETE'
-        }).done(function() {
-            alert('게시물이 삭제되었습니다.');
-            window.location.href = "/";
-        }).fail(function(error) {
-            alert(error);
-        })
+        if (document.getElementById('createReplyWriter').value !== document.getElementById("boardWriter").innerText) {
+            alert('수정할 권한이 없습니다.');
+        } else {
+            $.ajax({
+                url: '/api/board/' + id,
+                method: 'DELETE'
+            }).done(function() {
+                alert('게시물이 삭제되었습니다.');
+                window.location.href = "/";
+            }).fail(function(error) {
+                alert(error);
+            })
+        }
     })
 }

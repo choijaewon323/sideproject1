@@ -1,12 +1,14 @@
-let login = {
+let user = {
     init() {
         // buttons
         let register = document.getElementById('register');
         let login = document.getElementById('login');
         let logout = document.getElementById('logout');
-        
+        let updatePassword = document.getElementById('updatePassword');
+
         let account = document.getElementById('account');
         let password = document.getElementById('password');
+        let passwordConfirm = document.getElementById('passwordConfirm');
         
         if (register !== null) {
             register.addEventListener('click', function() {
@@ -77,7 +79,34 @@ let login = {
                 })
             })
         }
+
+        if (updatePassword !== null) {
+            updatePassword.addEventListener('click', function() {
+                $.ajax({
+                    url: '/api/user',
+                    method: 'PUT',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        account: account.value,
+                        password: password.value,
+                        passwordConfirm: passwordConfirm.value
+                    }),
+                    dataType: 'json'
+                    
+                }).done(function(result) {
+                    if (result === 'PASSWORD_UPDATE_SUCCESS') {
+                        alert('비밀번호를 변경하였습니다.');
+                        window.location.href = '/user/' + account.value;
+                    } else if (result === 'PASSWORD_CONFIRM_NOT_MATCH') {
+                        alert('비밀번호가 서로 다릅니다.');
+                    }
+
+                }).fail(function(error) {
+                    alert(error);
+                })
+            })
+        }
     }
 }
 
-login.init();
+user.init();

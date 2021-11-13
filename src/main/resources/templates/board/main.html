@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <div class="form-inline">
             <a href="/board/new"><button class="btn btn-default">글 추가</button></a>
-            <label th:text="${username}"></label><span>님 환영합니다.</span>
+            <a th:href="@{/user/{username}(username=${username})}"><label th:text="${username}"></label></a><span>님 환영합니다.</span>
             <button id="logout" class="btn btn-default">로그아웃</button>
         </div>
 
@@ -48,7 +48,7 @@
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="/js/board.js"></script>
-    <script src="/js/login.js"></script>
+    <script src="/js/user.js"></script>
 </body>
 
 </html>

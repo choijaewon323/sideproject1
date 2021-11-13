@@ -1,4 +1,4 @@
-package com.jaewon.sideproject1.domain;
+package com.jaewon.sideproject1.domain.board;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

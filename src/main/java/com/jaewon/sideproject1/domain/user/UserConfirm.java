@@ -1,4 +1,4 @@
-package com.jaewon.sideproject1.domain;
+package com.jaewon.sideproject1.domain.user;
 
 public enum UserConfirm {
     USER_CORRECT(0),

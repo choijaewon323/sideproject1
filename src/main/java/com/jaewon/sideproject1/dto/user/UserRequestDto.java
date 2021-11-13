@@ -1,6 +1,6 @@
-package com.jaewon.sideproject1.dto;
+package com.jaewon.sideproject1.dto.user;
 
-import com.jaewon.sideproject1.domain.User;
+import com.jaewon.sideproject1.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

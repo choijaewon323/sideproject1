@@ -1,12 +1,12 @@
 package com.jaewon.sideproject1.service;
 
-import com.jaewon.sideproject1.domain.Board;
-import com.jaewon.sideproject1.domain.BoardRepository;
-import com.jaewon.sideproject1.domain.Reply;
-import com.jaewon.sideproject1.domain.ReplyRepository;
-import com.jaewon.sideproject1.dto.ReplyRequestDto;
-import com.jaewon.sideproject1.dto.ReplyResponseDto;
-import com.jaewon.sideproject1.dto.ReplyUpdateRequestDto;
+import com.jaewon.sideproject1.domain.board.Board;
+import com.jaewon.sideproject1.domain.board.BoardRepository;
+import com.jaewon.sideproject1.domain.reply.Reply;
+import com.jaewon.sideproject1.domain.reply.ReplyRepository;
+import com.jaewon.sideproject1.dto.reply.ReplyRequestDto;
+import com.jaewon.sideproject1.dto.reply.ReplyResponseDto;
+import com.jaewon.sideproject1.dto.reply.ReplyUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

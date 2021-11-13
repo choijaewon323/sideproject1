@@ -1,6 +1,6 @@
 package com.jaewon.sideproject1.controller.api;
 
-import com.jaewon.sideproject1.dto.BoardRequestDto;
+import com.jaewon.sideproject1.dto.board.BoardRequestDto;
 import com.jaewon.sideproject1.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.jaewon.sideproject1.controller.api;
 
-import com.jaewon.sideproject1.domain.UserConfirm;
-import com.jaewon.sideproject1.dto.UserRequestDto;
+import com.jaewon.sideproject1.domain.user.UserConfirm;
+import com.jaewon.sideproject1.dto.user.UserRequestDto;
 import com.jaewon.sideproject1.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

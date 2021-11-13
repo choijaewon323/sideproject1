@@ -1,4 +1,4 @@
-package com.jaewon.sideproject1.domain;
+package com.jaewon.sideproject1.domain.common;
 
 import lombok.Getter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

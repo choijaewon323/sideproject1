@@ -1,6 +1,6 @@
-package com.jaewon.sideproject1.dto;
+package com.jaewon.sideproject1.dto.board;
 
-import com.jaewon.sideproject1.domain.Board;
+import com.jaewon.sideproject1.domain.board.Board;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

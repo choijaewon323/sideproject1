@@ -1,8 +1,8 @@
 package com.jaewon.sideproject1.controller.api;
 
-import com.jaewon.sideproject1.domain.Board;
-import com.jaewon.sideproject1.domain.BoardRepository;
-import com.jaewon.sideproject1.dto.BoardRequestDto;
+import com.jaewon.sideproject1.domain.board.Board;
+import com.jaewon.sideproject1.domain.board.BoardRepository;
+import com.jaewon.sideproject1.dto.board.BoardRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

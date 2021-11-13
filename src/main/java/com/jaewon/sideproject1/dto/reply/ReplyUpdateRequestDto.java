@@ -1,4 +1,4 @@
-package com.jaewon.sideproject1.dto;
+package com.jaewon.sideproject1.dto.reply;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

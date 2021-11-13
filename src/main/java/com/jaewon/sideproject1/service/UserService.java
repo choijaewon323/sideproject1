@@ -1,9 +1,9 @@
 package com.jaewon.sideproject1.service;
 
-import com.jaewon.sideproject1.domain.User;
-import com.jaewon.sideproject1.domain.UserConfirm;
-import com.jaewon.sideproject1.domain.UserRepository;
-import com.jaewon.sideproject1.dto.UserRequestDto;
+import com.jaewon.sideproject1.domain.user.User;
+import com.jaewon.sideproject1.domain.user.UserConfirm;
+import com.jaewon.sideproject1.domain.user.UserRepository;
+import com.jaewon.sideproject1.dto.user.UserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

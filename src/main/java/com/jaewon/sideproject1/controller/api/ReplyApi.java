@@ -1,8 +1,8 @@
 package com.jaewon.sideproject1.controller.api;
 
-import com.jaewon.sideproject1.dto.ReplyRequestDto;
-import com.jaewon.sideproject1.dto.ReplyResponseDto;
-import com.jaewon.sideproject1.dto.ReplyUpdateRequestDto;
+import com.jaewon.sideproject1.dto.reply.ReplyRequestDto;
+import com.jaewon.sideproject1.dto.reply.ReplyResponseDto;
+import com.jaewon.sideproject1.dto.reply.ReplyUpdateRequestDto;
 import com.jaewon.sideproject1.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

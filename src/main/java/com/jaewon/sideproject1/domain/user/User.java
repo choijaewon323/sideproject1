@@ -1,4 +1,4 @@
-package com.jaewon.sideproject1.domain;
+package com.jaewon.sideproject1.domain.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

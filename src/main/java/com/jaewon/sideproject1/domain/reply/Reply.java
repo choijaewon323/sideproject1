@@ -1,5 +1,7 @@
-package com.jaewon.sideproject1.domain;
+package com.jaewon.sideproject1.domain.reply;
 
+import com.jaewon.sideproject1.domain.common.TimeEntity;
+import com.jaewon.sideproject1.domain.board.Board;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

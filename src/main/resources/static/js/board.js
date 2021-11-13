@@ -1,82 +1,92 @@
-if (document.getElementById('createBoard') !== null) {
-    document.getElementById('createBoard').addEventListener('click', function() {
-        let title = document.getElementById('title').value;
-        let content = document.getElementById('content').value;
-        let writer = document.getElementById('writer').value;
-        let data = {
-            title: title,
-            content: content,
-            writer: writer
-        }
+let board = {
+    init() {
+        // buttons
+        let createBoard = document.getElementById('createBoard');
+        let updateBoardButton =  document.getElementById('updateBoardButton');
+        let updateBoard =  document.getElementById('updateBoard');
+        let deleteBoard =  document.getElementById('deleteBoard');
 
-        $.ajax({
-            url: '/api/board',
-            method: 'POST',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
-            alert('게시물이 등록되었습니다.');
-            window.location.href = "/";
-        }).fail(function(error) {
-            alert(error);
-        })
-    })
-}
-
-if (document.getElementById('updateBoardButton') !== null) {
-    document.getElementById('updateBoardButton').addEventListener('click', function() {
-        if (document.getElementById('createReplyWriter').value !== document.getElementById('boardWriter').innerText) {
-            alert('수정할 권한이 없습니다.');
-        } else {
-            let boardId = document.getElementById('boardId');
-
-            window.location.href = "/board/update/" + boardId.value;
-        }
-    })
-}
-
-if (document.getElementById('updateBoard') !== null) {
-    document.getElementById('updateBoard').addEventListener('click', function() {
-        let title = document.getElementById('title').value;
-        let content = document.getElementById('content').value;
-        let writer = document.getElementById('writer').value;
-        let id = document.getElementById('boardId').value;
-        let data = {
-            title: title,
-            content: content,
-            writer: writer
-        }
-
-        $.ajax({
-            url: '/api/board/' + id,
-            method: 'PUT',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
-            alert('게시물이 수정되었습니다.');
-            window.location.href = "/board/" + id;
-        }).fail(function(error) {
-            alert(error);
-        })
-    })
-}
-
-if (document.getElementById('deleteBoard') !== null) {
-    document.getElementById('deleteBoard').addEventListener('click', function() {
-        let id = document.getElementById('boardId').value;
-
-        if (document.getElementById('createReplyWriter').value !== document.getElementById("boardWriter").innerText) {
-            alert('수정할 권한이 없습니다.');
-        } else {
-            $.ajax({
-                url: '/api/board/' + id,
-                method: 'DELETE'
-            }).done(function() {
-                alert('게시물이 삭제되었습니다.');
-                window.location.href = "/";
-            }).fail(function(error) {
-                alert(error);
+        let title = document.getElementById('title');
+        let content = document.getElementById('content');
+        let writer = document.getElementById('writer');
+        let createReplyWriter = document.getElementById('createReplyWriter');
+        let boardWriter = document.getElementById('boardWriter');
+        let boardId =  document.getElementById('boardId');
+        
+        if (createBoard !== null) {
+            createBoard.addEventListener('click', function() {
+                $.ajax({
+                    url: '/api/board',
+                    method: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        title: title.value,
+                        content: content.value,
+                        writer: writer.value
+                    })
+        
+                }).done(function() {
+                    alert('게시물이 등록되었습니다.');
+                    window.location.href = "/";
+        
+                }).fail(function(error) {
+                    alert(error);
+                })
             })
         }
-    })
+        
+        if (updateBoardButton !== null) {
+            updateBoardButton.addEventListener('click', function() {
+                if (createReplyWriter.value !== boardWriter.innerText) {
+                    alert('수정할 권한이 없습니다.');
+                } else {
+                    window.location.href = "/board/update/" + boardId.value;
+                }
+            })
+        }
+        
+        if (updateBoard !== null) {
+            updateBoard.addEventListener('click', function() {
+                $.ajax({
+                    url: '/api/board/' + boardId.value,
+                    method: 'PUT',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        title: document.getElementById('title').value,
+                        content: document.getElementById('content').value,
+                        writer: document.getElementById('writer').value
+                    })
+        
+                }).done(function() {
+                    alert('게시물이 수정되었습니다.');
+                    window.location.href = "/board/" + boardId.value;
+        
+                }).fail(function(error) {
+                    alert(error);
+                })
+            })
+        }
+        
+        if (deleteBoard !== null) {
+            deleteBoard.addEventListener('click', function() {
+                if (createReplyWriter.value !== boardWriter.innerText) {
+                    alert('수정할 권한이 없습니다.');
+                } else {
+                    $.ajax({
+                        url: '/api/board/' + boardId.value,
+                        method: 'DELETE'
+        
+                    }).done(function() {
+                        alert('게시물이 삭제되었습니다.');
+                        window.location.href = "/";
+        
+                    }).fail(function(error) {
+                        alert(error);
+                    })
+                }
+            })
+        }
+    }
 }
+
+board.init();

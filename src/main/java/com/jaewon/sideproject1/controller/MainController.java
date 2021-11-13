@@ -34,6 +34,11 @@ public class MainController {
     @GetMapping("/board/{id}")
     public String getBoard(@PathVariable Long id, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
+
+        if (session == null) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("board", boardService.getBoard(id, true));
         model.addAttribute("replies", replyService.getReplies(id));
         model.addAttribute("username", (String)session.getAttribute("username"));
@@ -44,13 +49,24 @@ public class MainController {
     @GetMapping("/board/new")
     public String getNew(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
+
+        if (session == null) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("username", (String)session.getAttribute("username"));
 
         return "/board/new";
     }
 
     @GetMapping("/board/update/{id}")
-    public String getUpdate(@PathVariable Long id, Model model) {
+    public String getUpdate(@PathVariable Long id, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        if (session == null) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("board", boardService.getBoard(id, false));
 
         return "/board/update";

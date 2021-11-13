@@ -28,7 +28,7 @@ public class MainController {
         model.addAttribute("boards", boardService.getBoards());
         model.addAttribute("username", (String)session.getAttribute("username"));
 
-        return "main";
+        return "/board/main";
     }
 
     @GetMapping("/board/{id}")
@@ -38,7 +38,7 @@ public class MainController {
         model.addAttribute("replies", replyService.getReplies(id));
         model.addAttribute("username", (String)session.getAttribute("username"));
 
-        return "detail";
+        return "/board/detail";
     }
 
     @GetMapping("/board/new")
@@ -46,13 +46,13 @@ public class MainController {
         HttpSession session = request.getSession(false);
         model.addAttribute("username", (String)session.getAttribute("username"));
 
-        return "new";
+        return "/board/new";
     }
 
     @GetMapping("/board/update/{id}")
     public String getUpdate(@PathVariable Long id, Model model) {
         model.addAttribute("board", boardService.getBoard(id, false));
 
-        return "update";
+        return "/board/update";
     }
 }

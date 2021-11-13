@@ -5,6 +5,7 @@ let board = {
         let updateBoardButton =  document.getElementById('updateBoardButton');
         let updateBoard =  document.getElementById('updateBoard');
         let deleteBoard =  document.getElementById('deleteBoard');
+        let search = document.getElementById('search');
 
         let title = document.getElementById('title');
         let content = document.getElementById('content');
@@ -12,7 +13,18 @@ let board = {
         let createReplyWriter = document.getElementById('createReplyWriter');
         let boardWriter = document.getElementById('boardWriter');
         let boardId =  document.getElementById('boardId');
-        
+        let searchKeyword = document.getElementById('searchKeyword');
+
+        if (search !== null) {
+            search.addEventListener('click', function() {
+                if (searchKeyword.value === '') {
+                    alert('검색어를 입력해주세요.');
+                } else {
+                    window.location.href = "/search?searchKeyword=" + searchKeyword.value;
+                }
+            })
+        }
+
         if (createBoard !== null) {
             createBoard.addEventListener('click', function() {
                 $.ajax({

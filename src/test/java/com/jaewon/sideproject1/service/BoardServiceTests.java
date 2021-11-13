@@ -83,4 +83,16 @@ public class BoardServiceTests {
         assertThat(result2.getContent()).isEqualTo("내용2");
         assertThat(result2.getCnt()).isEqualTo(1L);
     }
+
+    @Test
+    void searchByTitleTest() {
+        Board board1 = boardRepository.save(new Board("제목1", "내용1", "작성자1"));
+        Board board2 = boardRepository.save(new Board("제목2", "내용2", "작성자2"));
+
+        // test
+        List<BoardResponseDto> results = boardService.searchByTitle("제목");
+
+        assertThat(results.size()).isEqualTo(2);
+        assertThat(results.get(0).getContent()).isEqualTo("내용1");
+    }
 }

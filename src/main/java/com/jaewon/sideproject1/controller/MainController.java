@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,6 +28,13 @@ public class MainController {
 
         model.addAttribute("boards", boardService.getBoards());
         model.addAttribute("username", (String)session.getAttribute("username"));
+
+        return "/board/main";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam String searchKeyword) {
+        model.addAttribute("boards", boardService.searchByTitle(searchKeyword));
 
         return "/board/main";
     }

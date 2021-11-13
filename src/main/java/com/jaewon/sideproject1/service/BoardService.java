@@ -63,4 +63,14 @@ public class BoardService {
 
         boardRepository.deleteById(id);
     }
+
+    public List<BoardResponseDto> searchByTitle(String title) {
+        List<BoardResponseDto> results = new ArrayList<>();
+
+        for (Board board : boardRepository.findByTitleContains(title)) {
+            results.add(new BoardResponseDto(board));
+        }
+
+        return results;
+    }
 }

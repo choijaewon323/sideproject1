@@ -23,4 +23,8 @@ public class User {
         this.account = account;
         this.password = password;
     }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }

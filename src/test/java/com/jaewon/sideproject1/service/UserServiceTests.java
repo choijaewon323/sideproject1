@@ -3,6 +3,7 @@ package com.jaewon.sideproject1.service;
 import com.jaewon.sideproject1.domain.user.User;
 import com.jaewon.sideproject1.domain.user.UserConfirm;
 import com.jaewon.sideproject1.domain.user.UserRepository;
+import com.jaewon.sideproject1.dto.user.UserPasswordUpdateRequestDto;
 import com.jaewon.sideproject1.dto.user.UserRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -47,5 +48,18 @@ public class UserServiceTests {
                 .isEqualTo(UserConfirm.PASSWORD_WRONG);
         assertThat(userService.userConfirm(new UserRequestDto("아이디", "비밀번호")))
                 .isEqualTo(UserConfirm.USER_CORRECT);
+    }
+
+    @Test
+    void updatePasswordTest() {
+        User user = userRepository.save(new User("아이디", "비밀번호"));
+
+        // test
+        assertThat(userService.updatePassword(
+                new UserPasswordUpdateRequestDto("아이디", "비밀번호", "비밀번호1")
+        )).isEqualTo(UserConfirm.PASSWORD_CONFIRM_NOT_MATCH);
+        assertThat(userService.updatePassword(
+                new UserPasswordUpdateRequestDto("아이디", "비밀번호", "비밀번호")
+        )).isEqualTo(UserConfirm.PASSWORD_UPDATE_SUCCESS);
     }
 }

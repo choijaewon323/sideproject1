@@ -12,13 +12,15 @@ let user = {
         
         if (register !== null) {
             register.addEventListener('click', function() {
+                let cryptPassword = CryptoJS.SHA3(password.value).toString()
+                
                 $.ajax({
                     url: '/api/user',
                     method: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify({
                         account: account.value,
-                        password: password.value
+                        password: cryptPassword
                     }),
                     dataType: 'json'
         
@@ -38,13 +40,15 @@ let user = {
         
         if (login !== null) {
             login.addEventListener('click', function() {
+                let cryptPassword = CryptoJS.SHA3(password.value).toString();
+
                 $.ajax({
                     url: '/api/user/auth',
                     method: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify({
                         account: account.value,
-                        password: password.value
+                        password: cryptPassword
                     }),
                     dataType: 'json'
         
@@ -82,14 +86,17 @@ let user = {
 
         if (updatePassword !== null) {
             updatePassword.addEventListener('click', function() {
+                let cryptPassword = CryptoJS.SHA3(password.value).toString();
+                let cryptPasswordConfirm = CryptoJS.SHA3(passwordConfirm.value).toString();
+
                 $.ajax({
                     url: '/api/user',
                     method: 'PUT',
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify({
                         account: account.value,
-                        password: password.value,
-                        passwordConfirm: passwordConfirm.value
+                        password: cryptPassword,
+                        passwordConfirm: cryptPasswordConfirm
                     }),
                     dataType: 'json'
                     

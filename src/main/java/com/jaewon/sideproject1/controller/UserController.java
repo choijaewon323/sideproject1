@@ -1,5 +1,6 @@
 package com.jaewon.sideproject1.controller;
 
+import com.jaewon.sideproject1.domain.common.SessionCommon;
 import com.jaewon.sideproject1.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
@@ -17,21 +17,20 @@ public class UserController {
 
     @GetMapping("/user/{username}")
     public String getUserDetail(@PathVariable String username, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return "redirect:/login";
+        if (!SessionCommon.isSessionValid(request)) {
+            return SessionCommon.redirectToLogin();
         }
-        model.addAttribute("username", (String)session.getAttribute("username"));
+
+        model.addAttribute("username", (String)SessionCommon.getAttribute("username", request));
         return "/user/userDetail";
     }
 
     @GetMapping("/user/update/{username}")
     public String getUpdatePassword(@PathVariable String username, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return "redirect:/login";
+        if (!SessionCommon.isSessionValid(request)) {
+            return SessionCommon.redirectToLogin();
         }
-        model.addAttribute("username", (String)session.getAttribute("username"));
+        model.addAttribute("username", (String)SessionCommon.getAttribute("username", request));
         return "/user/updatePassword";
     }
 }

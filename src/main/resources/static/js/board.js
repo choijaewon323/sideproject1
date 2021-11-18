@@ -82,7 +82,7 @@ let board = {
         if (deleteBoard !== null) {
             deleteBoard.addEventListener('click', function() {
                 if (createReplyWriter.value !== boardWriter.innerText) {
-                    alert('수정할 권한이 없습니다.');
+                    alert('삭제할 권한이 없습니다.');
                 } else {
                     $.ajax({
                         url: '/api/board/' + boardId.value,

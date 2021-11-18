@@ -1,6 +1,7 @@
 package com.jaewon.sideproject1.dto.board;
 
 import com.jaewon.sideproject1.domain.board.Board;
+import com.jaewon.sideproject1.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,7 @@ public class BoardRequestDto {
         this.writer = writer;
     }
 
-    public Board toEntity() {
-        return new Board(this.title, this.content, this.writer);
+    public Board toEntity(User user) {
+        return new Board(this.title, this.content, this.writer, user);
     }
 }

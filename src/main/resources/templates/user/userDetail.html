@@ -12,8 +12,9 @@
 
 <body>
     <div class="container-fluid">
-        <ul>
-            <li><a th:href="@{/user/update/{username}(username=${username})}">비밀번호 변경</a></li>
+        <ul class="list-group">
+            <li class="list-group-item"><a th:href="@{/user/update/{username}(username=${username})}">비밀번호 변경</a></li>
+            <li class="list-group-item"><a th:href="@{/user/list/{username}(username=${username})}">게시글 및 댓글 목록</a></li>
         </ul>
     </div>
 

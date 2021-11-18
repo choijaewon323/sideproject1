@@ -4,6 +4,8 @@ import com.jaewon.sideproject1.domain.board.Board;
 import com.jaewon.sideproject1.domain.board.BoardRepository;
 import com.jaewon.sideproject1.domain.reply.Reply;
 import com.jaewon.sideproject1.domain.reply.ReplyRepository;
+import com.jaewon.sideproject1.domain.user.User;
+import com.jaewon.sideproject1.domain.user.UserRepository;
 import com.jaewon.sideproject1.dto.board.BoardRequestDto;
 import com.jaewon.sideproject1.dto.board.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final ReplyRepository replyRepository;
+    private final UserRepository userRepository;
 
     public List<BoardResponseDto> getBoards() {
         List<BoardResponseDto> results = new ArrayList<>();
@@ -42,7 +45,9 @@ public class BoardService {
 
     @Transactional
     public void create(BoardRequestDto requestDto) {
-        boardRepository.save(requestDto.toEntity());
+        User user = userRepository.findByAccount(requestDto.getWriter()).orElseThrow(IllegalArgumentException::new);
+
+        boardRepository.save(requestDto.toEntity(user));
     }
 
     @Transactional
@@ -68,6 +73,18 @@ public class BoardService {
         List<BoardResponseDto> results = new ArrayList<>();
 
         for (Board board : boardRepository.findByTitleContains(title)) {
+            results.add(new BoardResponseDto(board));
+        }
+
+        return results;
+    }
+
+    public List<BoardResponseDto> findByUser(String account) {
+        User user = userRepository.findByAccount(account).orElseThrow(IllegalArgumentException::new);
+        List<BoardResponseDto> results = new ArrayList<>();
+
+        for (Board board :
+                boardRepository.findByUser(user)) {
             results.add(new BoardResponseDto(board));
         }
 

@@ -2,9 +2,12 @@ package com.jaewon.sideproject1.service;
 
 import com.jaewon.sideproject1.domain.board.Board;
 import com.jaewon.sideproject1.domain.board.BoardRepository;
+import com.jaewon.sideproject1.domain.user.User;
+import com.jaewon.sideproject1.domain.user.UserRepository;
 import com.jaewon.sideproject1.dto.board.BoardRequestDto;
 import com.jaewon.sideproject1.dto.board.BoardResponseDto;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,10 +24,18 @@ public class BoardServiceTests {
     BoardService boardService;
     @Autowired
     BoardRepository boardRepository;
+    @Autowired
+    UserRepository userRepository;
+
+    @BeforeEach
+    void beforeEach() {
+        userRepository.save(new User("작성자", "c"));
+    }
 
     @AfterEach
     void afterEach() {
         boardRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
@@ -40,7 +51,7 @@ public class BoardServiceTests {
         Board original = boardRepository.save(new Board("제목", "내용", "작성자"));
 
         // test
-        boardService.update(original.getId(), new BoardRequestDto("제목1", "내용1", "작성자1"));
+        boardService.update(original.getId(), new BoardRequestDto("제목1", "내용1", "작성자"));
 
         assertThat(boardRepository.findAll().get(0).getContent()).isEqualTo("내용1");
         assertThat(boardRepository.count()).isEqualTo(1L);
@@ -58,8 +69,8 @@ public class BoardServiceTests {
 
     @Test
     void getBoardsTest() {
-        boardRepository.save(new Board("제목1", "내용1", "작성자1"));
-        boardRepository.save(new Board("제목2", "내용2", "작성자2"));
+        boardRepository.save(new Board("제목1", "내용1", "작성자"));
+        boardRepository.save(new Board("제목2", "내용2", "작성자"));
 
         // test
         List<BoardResponseDto> results =  boardService.getBoards();
@@ -70,8 +81,8 @@ public class BoardServiceTests {
 
     @Test
     void getBoardTest() {
-        Board board1 = boardRepository.save(new Board("제목1", "내용1", "작성자1"));
-        Board board2 = boardRepository.save(new Board("제목2", "내용2", "작성자2"));
+        Board board1 = boardRepository.save(new Board("제목1", "내용1", "작성자"));
+        Board board2 = boardRepository.save(new Board("제목2", "내용2", "작성자"));
 
         // test
         BoardResponseDto result1 = boardService.getBoard(board1.getId(), false);
@@ -86,8 +97,8 @@ public class BoardServiceTests {
 
     @Test
     void searchByTitleTest() {
-        Board board1 = boardRepository.save(new Board("제목1", "내용1", "작성자1"));
-        Board board2 = boardRepository.save(new Board("제목2", "내용2", "작성자2"));
+        Board board1 = boardRepository.save(new Board("제목1", "내용1", "작성자"));
+        Board board2 = boardRepository.save(new Board("제목2", "내용2", "작성자"));
 
         // test
         List<BoardResponseDto> results = boardService.searchByTitle("제목");

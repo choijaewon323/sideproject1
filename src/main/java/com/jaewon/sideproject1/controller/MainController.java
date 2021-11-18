@@ -37,6 +37,7 @@ public class MainController {
         }
 
         model.addAttribute("boards", boardService.searchByTitle(searchKeyword));
+        model.addAttribute("username", (String)SessionCommon.getAttribute("username", request));
 
         return "/board/main";
     }

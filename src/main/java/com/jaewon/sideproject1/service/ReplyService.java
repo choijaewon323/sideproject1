@@ -4,6 +4,8 @@ import com.jaewon.sideproject1.domain.board.Board;
 import com.jaewon.sideproject1.domain.board.BoardRepository;
 import com.jaewon.sideproject1.domain.reply.Reply;
 import com.jaewon.sideproject1.domain.reply.ReplyRepository;
+import com.jaewon.sideproject1.domain.user.User;
+import com.jaewon.sideproject1.domain.user.UserRepository;
 import com.jaewon.sideproject1.dto.reply.ReplyRequestDto;
 import com.jaewon.sideproject1.dto.reply.ReplyResponseDto;
 import com.jaewon.sideproject1.dto.reply.ReplyUpdateRequestDto;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ReplyService {
     private final ReplyRepository replyRepository;
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
     public List<ReplyResponseDto> getReplies(Long boardId) {
         List<ReplyResponseDto> results = new ArrayList<>();
@@ -54,5 +57,17 @@ public class ReplyService {
     @Transactional
     public void delete(Long replyId) {
         replyRepository.deleteById(replyId);
+    }
+
+    public List<ReplyResponseDto> findByUser(String account) {
+        User user = userRepository.findByAccount(account).orElseThrow(IllegalArgumentException::new);
+        List<ReplyResponseDto> results = new ArrayList<>();
+
+        for (Reply reply :
+                replyRepository.findByUser(user)) {
+            results.add(new ReplyResponseDto(reply));
+        }
+
+        return results;
     }
 }

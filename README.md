@@ -3,7 +3,7 @@
 REST API를 구현한 게시판입니다. 프론트엔드는 HTML, CSS, Javascript, JQuery, Bootstrap을 이용하여 만들었고, <br>
 백엔드는 Spring Boot, MariaDB, H2database, Spring Data JPA를 사용하였습니다. 
 
-## 구조
+## 백엔드 구조
 - controller
   - api
     - BoardApi.java
@@ -41,3 +41,23 @@ REST API를 구현한 게시판입니다. 프론트엔드는 HTML, CSS, Javascri
   - BoardService.java
   - ReplyService.java
   - UserService.java
+
+## 프론트엔드 구조
+- static
+  - js
+    - board.js
+    - reply.js
+    - user.js
+- templates
+  - board
+    - detail.html
+    - main.html
+    - new.html
+    - update.html
+  - login
+    - login.html
+    - register.html
+  - user
+    - updatePassword.html
+    - userDetail.html
+    - userList.html
